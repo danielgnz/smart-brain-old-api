@@ -1,4 +1,4 @@
-const express = require('express');
+\const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const knex = require('knex');
@@ -12,7 +12,7 @@ const image =  require('./controllers/image');
 const db = knex({
 	client: 'pg',
 	connection: {
-		host: '127.0.0.1',
+		host: 'postgresql-amorphous-79547',
 		user: 'postgres',
 		password: 'admin',
 		database: 'smart-brain'
