@@ -12,31 +12,10 @@ const image =  require('./controllers/image');
 const db = knex({
 	client: 'pg',
 	connection: {
-		connectionSring: `${process.env.DATABASE_URL}`,
+		connectionSring: process.env.DATABASE_URL,
 		ssl: true,
 	}
 });
-
-// <----- Testing if database is connected
-
-const { Client } = require('pg');
-
-const client = new Client({
-	connectionSring: `${process.env.DATABASE_URL}`,
-	ssl: true,
-});
-
-client.connect();
-
-client.query('SELECT * FROM test_table;', (err, res) => {
-	if(err) throw err;
-	for(let row of res.rows) {
-		console.log(JSON.stringify(row));
-	}
-	client.end();
-});
-
-// ------> End of Testing
 
 const app = express();
 
@@ -44,19 +23,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => { res.send(`it is working!`) });
-// app.get('/db', async (req,res) => {
-// 	try {
-// 		const client = await pool.connect()
-// 		const result = await client.query('SELECT * FROM test_table');
-// 		const results ={ 'results': (result) ? result.rows : null };
-// 		res.render('pages/db', results);
-// 		client.release();
-// 	}
-// 	catch (err) {
-// 		console.error(err);
-// 		res.send("Error " + err);
-// 	}
-// });
 
 app.get('/profile/:id', profile.handleProfile(db));
 
