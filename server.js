@@ -24,6 +24,16 @@ app.use(cors());
 
 app.get('/', (req, res) => { res.send(`it is working!`) });
 
+app.get('/db', (req, res) => {
+	return db.select('*').from('test_table')
+	.then(data => {
+		res.json(data)
+	})
+	.catch(err => {
+		res.status(400).json(`can't get data`)
+	})
+})
+
 app.get('/profile/:id', profile.handleProfile(db));
 
 app.post('/signin', signin.handleSignIn(db, bcrypt));
