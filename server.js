@@ -17,11 +17,26 @@ const db = knex({
 	}
 });
 
-// const { Pool } = require('pg');
-// const pool = new Pool({
-// 	connectionSring: process.env.DATABASE_URL,
-// 	ssl: true
-// });
+// <----- Testing if database is connected
+
+const { Client } = require('pg');
+
+const client = new Client({
+	connectionSring: process.env.DATABASE_URL,
+	ssl: true,
+});
+
+client.connect();
+
+client.query('SELECT * FROM test_table;', (err, res) => {
+	if(err) throw err;
+	for(let row of res.rows) {
+		console.log(JSON.stringify(row));
+	}
+	client.end();
+});
+
+// ------> End of Testing
 
 const app = express();
 
