@@ -12,7 +12,7 @@ const image =  require('./controllers/image');
 const db = knex({
 	client: 'pg',
 	connection: {
-		connectionSring: process.env.DATABASE_URL,
+		connectionSring: `${process.env.DATABASE_URL}`,
 		ssl: true,
 	}
 });
@@ -22,7 +22,7 @@ const db = knex({
 const { Client } = require('pg');
 
 const client = new Client({
-	connectionSring: process.env.DATABASE_URL,
+	connectionSring: `${process.env.DATABASE_URL}`,
 	ssl: true,
 });
 
