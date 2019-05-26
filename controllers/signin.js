@@ -13,13 +13,13 @@ const handleSignIn = (db, bcrypt) => (req, res) => {
 			.then(user => {
 				res.json(user[0])
 			})
-			.catch(err => res.status(400).json('email/password is incorrect'))
+			.catch(err => res.status(400).json('email/password is incorrect1'))
 			}
 			else{
-			res.status(400).json('email/password is incorrect')
+			res.status(400).json('email/password is incorrect2')
 		}
 	})
-	.catch(err => res.status(400).json('email/password is incorrect'))
+	.catch(err => res.status(400).json('email/password is incorrect3'))
 };
 
 module.exports = {

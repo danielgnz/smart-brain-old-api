@@ -11,7 +11,7 @@ const handleRegister = (db, bcrypt) => (req, res) => {
 	const hash = bcrypt.hashSync(password, salt);
 	
 	db.transaction(trx => {
-		trx.insert({
+		return trx.insert({
 			hash: hash,
 			email: email
 		})
